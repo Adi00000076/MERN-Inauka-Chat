@@ -1,0 +1,66 @@
+/* Chat container */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #f1f1f1, #e2e2e2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+}
+
+/* Home section */
+.home {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Chats header */
+.chats_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #04abd7, #06b2bc, #08bc97);
+  padding: 10px;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding shadow to header */
+}
+
+/* Chats icon */
+.chats_icon {
+  width: 150px;
+  height: 50px;
+}
+
+/* Chats logout button */
+.chats_logout {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logout-icon {
+  margin-right: 5px;
+}
+
+/* Chat lists */
+.chat-lists {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background-color: white;
+  border-top: 1px solid #ddd;
+}
+
+/* Custom scrollbar */
+.chat-lists::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chat-lists::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #154653, #06b2bc, #08bc97);
+  border-radius: 5px;
+}
+
+.chat-lists::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #06b2bc, #08bc97, #04abd7);
+}

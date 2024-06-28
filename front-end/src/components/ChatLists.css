@@ -1,0 +1,88 @@
+
+/* Chat lists container */
+.chatlists {
+  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 75vh; /* Limit height of chat list */
+}
+
+/* Individual chat item */
+.chat_item {
+  display: flex;
+  margin: 10px 0;
+  align-items: flex-start;
+}
+
+/* Sender's chat styling */
+.chat_sender {
+  justify-content: flex-end;
+}
+
+/* Receiver's chat styling */
+.chat_receiver {
+  justify-content: flex-start;
+}
+
+/* Avatar styling */
+.chat_avatar {
+  margin-right: 10px;
+}
+
+.chat_avatar img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* Chat content */
+.chat_content {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 10px;
+  max-width: 80%; /* Adjusted for better readability */
+  word-wrap: break-word; /* Ensure long words wrap */
+}
+
+/* Chat message text */
+.chat_content h5 {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333; /* Adjusted text color for readability */
+}
+
+.chat_content p {
+  margin: 0;
+  font-size: 16px;
+  color: #555; /* Adjusted text color for readability */
+}
+
+/* Chat file link or image */
+.chat_file {
+  margin-top: 5px;
+}
+
+.chat_file img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.chat_file a {
+  color: #075e54;
+  text-decoration: none;
+}
+
+/* Chat date grouping */
+.chat_date {
+  margin: 10px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #888;
+}
+
+/* Chat timestamp */
+.chat_time {
+  align-self: flex-end;
+  font-size: 12px;
+  color: #888;
+  margin-left: 10px;
+}
