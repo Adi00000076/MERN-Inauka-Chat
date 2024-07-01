@@ -1,208 +1,92 @@
+/* InputText.css */
+
 .inputtext_container {
-     display: flex;
-     align-items: center;
-     padding: 10px;
-     border-top: 1px solid #ccc;
-     bottom: 0;
-     width: 100%;
-     box-sizing: border-box;
-     background: whitesmoke;
-     background: linear-gradient(135deg, #c3dae0, #69ebd1, #06b2bc);
-     background-size: cover;
-   }
-   
-   .inputtext_container textarea {
-     flex: 1;
-     resize: none;
-     padding: 10px;
-     border: 1px solid #ccc;
-     border-radius: 4px;
-     margin-right: 10px;
-     overflow: hidden;
-   }
-   
-   .file-input-container {
-     position: relative;
-     margin-right: 10px;
-   }
-   
-   .file-input-label {
-     display: flex;
-     align-items: center;
-     cursor: pointer;
-     padding: 5px 10px;
-     background: #fff;
-     border: 1px solid #ccc;
-     border-radius: 4px;
-   }
-   
-   .file-name {
-     margin-left: 10px;
-     font-size: 14px;
-   }
-   
-   button {
-     background: none;
-     border: none;
-     cursor: pointer;
-     color: black;
-     font-size: 20px;
-   }
-   
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  align-items: center;
+  padding: 15px;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
 
+.reply_message {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+}
 
+.reply_message p {
+  margin: 0;
+  padding-bottom: 5px;
+}
 
-   .inputtext_container {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ddd;
-    border-radius: 0 0 10px 10px;
-  }
-  
-  .inputtext_container textarea {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    resize: none;
-    margin-right: 10px;
-    font-size: 16px;
-  }
-  
-  .send_button {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, #04abd7, #06b2bc, #08bc97);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s;
-  }
-  
-  .send_button .send_icon {
-    margin-right: 5px;
-  }
-  
-  .send_button:hover {
-    background: linear-gradient(135deg, #06b2bc, #08bc97, #04abd7);
-  }
-  
+.clear_reply_button {
+  background-color: transparent;
+  color: #007bff;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 0.9rem;
+}
 
+.clear_reply_button:hover {
+  text-decoration: underline;
+}
+
+textarea {
+  flex: 1;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical; /* Allow vertical resizing */
+}
+
+.file_label {
+  margin-left: 10px; /* Adjust spacing between upload button and textarea */
+}
+
+.upload_icon {
+  margin-right: 5px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.selected_image {
+  margin-left: 10px; /* Adjust spacing for selected image display */
+  font-size: 0.9rem;
+}
+
+.send_button {
+  margin-left: 10px; /* Adjust spacing between textarea and send button */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.send_button:hover {
+  background-color: #0056b3;
+}
+
+@media screen and (max-width: 768px) {
   .inputtext_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  textarea {
-    width: calc(100% - 120px); /* Adjust width for textarea and file input */
-    border-radius: 8px;
-    border: 1px solid #ccc;
     padding: 10px;
-    font-size: 16px;
   }
-  
-  input[type="file"] {
-    display: none; /* Hide the file input initially */
-  }
-  
-  .file_label {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 10px;
-    margin-left: 5px;
-    cursor: pointer;
-  }
-  
-  .file_label:hover {
-    background-color: #0056b3;
-  }
-  
-  .send_button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 10px;
-    margin-left: 5px;
-    cursor: pointer;
-  }
-  
-  .send_button:hover {
-    background-color: #0056b3;
-  }
-  
-  .send_icon {
-    margin-right: 5px;
-  }
-  
 
-
-  .inputtext_container {
-    position: relative;
-  }
-  
-  .reply_message {
-    background-color: #f0f0f0;
-    padding: 8px;
-    margin-bottom: 10px;
-    border-left: 4px solid #4caf50; /* Green border for reply message */
-  }
-  
-  .reply_message p {
-    margin: 0;
-  }
-  
-  .reply_message button {
-    margin-left: 8px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 4px 8px;
-    cursor: pointer;
-  }
-  
-  .reply_message button:hover {
-    background-color: #d32f2f;
-  }
-  
-  textarea {
-    width: calc(100% - 32px); /* Adjust width for file upload icon and padding */
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: none;
-  }
-  
   .file_label {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    font-size: 14px;
+    margin-left: 0;
+    margin-top: 10px; /* Adjust spacing for smaller screens */
   }
-  
-  .file_label .upload_icon {
-    margin-right: 8px;
-  }
-  
+
   .send_button {
-    background-color: #2196f3;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
+    margin-left: 0;
+    margin-top: 10px; /* Adjust spacing for smaller screens */
   }
-  
-  .send_button:hover {
-    background-color: #0d8bf2;
-  }
-  
+}

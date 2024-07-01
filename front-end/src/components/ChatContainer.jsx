@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { FaUser, FaSignOutAlt } from "react-icons/fa";
+import React, { useState, useEffect, useRef } from "react";
+import { FaUser, FaSignOutAlt, FaTimes } from "react-icons/fa";
 import ChatLists from "./ChatLists";
 import InputText from "./InputText";
 import UserLogin from "./UserLogin";
 import socketIOClient from "socket.io-client";
-import "./ChatContainer.css";
-
-import Infyz from "../assets/images/infyz.jpg";
+import "./ChatContainer.css"; // Import your CSS file for styling
+import Infyz from "../assets/images/infyz.jpg"; // Assuming this is your avatar image
 
 const ChatContainer = () => {
   const [user, setUser] = useState(localStorage.getItem("user"));
-  const socketio = socketIOClient("http://99.99.96.10:3002/");
+  const socketio = socketIOClient("http://localhost:3002/");
   const [chats, setChats] = useState([]);
-  const [replyMessage, setReplyMessage] = useState(null); // State for reply message
+  const [replyMessage, setReplyMessage] = useState(null);
+  const chatEndRef = useRef(null); // Define chatEndRef here
 
   useEffect(() => {
-    // Clear chat history on component mount if no user is logged in
     if (!user) {
       setChats([]);
     }
@@ -34,45 +33,67 @@ const ChatContainer = () => {
     };
   }, [user]);
 
-  const addMessage = (chat) => {
+  const addMessage = async (message, fileData) => {
     const newChat = {
       username: localStorage.getItem("user"),
-      message: chat,
-      avatar: localStorage.getItem("avatar"),
+      message,
+      avatar: localStorage.getItem("avatar"), // Ensure you have avatar stored in localStorage
+      file_path: fileData?.filePath,
     };
     socketio.emit("newMessage", newChat);
   };
 
   const handleSelectReply = (chat) => {
-    setReplyMessage(chat); // Set selected message as reply message
+    setReplyMessage(chat);
   };
 
   const clearReply = () => {
-    setReplyMessage(null); // Clear the reply message
+    setReplyMessage(null);
   };
 
-  const Logout = () => {
+  const logoutUser = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("avatar");
     setUser("");
-    setChats([]); // Clear chat history on logout
+    setChats([]);
   };
+
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [chats]);
 
   return (
     <div className="chat-container">
       {user ? (
         <div className="home">
-          <div className="chats_header">
-            <h4>
-              <FaUser /> Username: {user}
-            </h4>
-            <img src={Infyz} alt="Infyz" className="chats_icon" />
-            <p className="chats_logout" onClick={Logout}>
-              <FaSignOutAlt className="logout-icon" /> <strong>Logout</strong>
-            </p>
+          <div className="chats-header">
+            <div className="left-section">
+              <FaUser className="user-icon" />
+              <span className="username">{user}</span>
+            </div>
+            <div className="middle-section">
+              <img src={Infyz} alt="Infyz" className="avatar" />
+            </div>
+            <div className="right-section">
+              <p className="logout" onClick={logoutUser}>
+                <FaSignOutAlt className="logout-icon" />
+                <strong>Logout</strong>
+              </p>
+            </div>
           </div>
-          <ChatLists chats={chats} onSelectReply={handleSelectReply} /> {/* Pass onSelectReply handler */}
-          <InputText addMessage={addMessage} replyMessage={replyMessage} clearReply={clearReply} /> {/* Pass replyMessage and clearReply */}
+          <ChatLists chats={chats} onSelectReply={handleSelectReply} currentUser={user} />
+          <div ref={chatEndRef} /> {/* This will ensure scrolling to bottom */}
+          <InputText addMessage={addMessage} replyMessage={replyMessage} />
+          {replyMessage && (
+            <div className="clear-reply" onClick={clearReply}>
+              <FaTimes className="clear-reply-icon" />
+              Clear Reply
+            </div>
+          )}
         </div>
       ) : (
         <UserLogin setUser={setUser} />

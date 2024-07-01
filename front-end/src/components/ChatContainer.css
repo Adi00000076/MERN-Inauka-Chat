@@ -1,39 +1,59 @@
-/* Chat container */
+/* ChatContainer.css */
+
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background: linear-gradient(135deg, #f1f1f1, #e2e2e2);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow */
+  height: 100vh; /* Ensure full viewport height */
+
+  background: linear-gradient(135deg, #eff2f6 , #cddde0, #eff2f6 );
+  
+  
+
+
+  
 }
 
-/* Home section */
 .home {
+  flex: 1; /* Takes remaining space */
   display: flex;
   flex-direction: column;
-  flex: 1;
+  overflow-y: auto; /* Enable vertical scrolling for chat content */
 }
 
-/* Chats header */
-.chats_header {
+.chats-header {
+  background-color: #ffffff; /* Header background color */
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example box shadow for header */  
+  background: linear-gradient(135deg, #06b2bc, #08bc97, #04abd7);
+  
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(135deg, #04abd7, #06b2bc, #08bc97);
-  padding: 10px;
-  color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding shadow to header */
+  justify-content: space-between; /* Space items evenly across the header */
 }
 
-/* Chats icon */
-.chats_icon {
-  width: 150px;
-  height: 50px;
+
+.user-info {
+  display: flex;
+  align-items: center;
 }
 
-/* Chats logout button */
-.chats_logout {
+.user-icon {
+  font-size: 1.5rem;
+  margin-right: 5px;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.avatar {
+  height: 36px;
+}
+
+.logout {
   cursor: pointer;
+  margin-left: 10px;
   display: flex;
   align-items: center;
 }
@@ -42,25 +62,23 @@
   margin-right: 5px;
 }
 
-/* Chat lists */
-.chat-lists {
-  flex: 1;
-  overflow-y: auto;
-  padding: 10px;
-  background-color: white;
-  border-top: 1px solid #ddd;
+@media screen and (max-width: 768px) {
+  .home {
+    padding: 10px; /* Example padding for smaller screens */
+  }
 }
 
-/* Custom scrollbar */
-.chat-lists::-webkit-scrollbar {
-  width: 10px;
+@media screen and (max-width: 480px) {
+  .chats-header {
+    padding: 5px; /* Adjust header padding for smaller screens */
+  }
 }
 
-.chat-lists::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #154653, #06b2bc, #08bc97);
-  border-radius: 5px;
-}
 
-.chat-lists::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #06b2bc, #08bc97, #04abd7);
-}
+
+
+
+
+
+
+
