@@ -1,9 +1,24 @@
-const mongoose = require('mongoose')
-function Connection() {
-    const mongoURI = "mongodb://127.0.0.1:27017/chat"
-    mongoose.connect(mongoURI)
-    .then(() => console.log("connected"))
-    .catch(err => console.log(err))
-}
+// // Load environment variables from .env file
+// require('dotenv').config();
 
-module.exports = Connection
+// const mysql = require('mysql2');
+
+// // Create a connection to the database
+// const db = mysql.createConnection({
+//     host: process.env.DB_HOST,
+//     user: process.env.DB_USER,
+//     password: process.env.DB_PASSWORD,
+//     database: process.env.DB_NAME,
+//     port: process.env.DB_PORT
+// });
+
+// // Connect to the database
+// db.connect((err) => {
+//     if (err) {
+//         console.error('MySQL connection error:', err);
+//         throw err;
+//     }
+//     console.log('MySQL connected');
+// });
+
+// module.exports = db;

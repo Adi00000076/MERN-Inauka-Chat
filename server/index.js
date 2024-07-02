@@ -5,6 +5,7 @@ const mysql = require('mysql2');
 const multer = require('multer');
 const path = require('path');
 const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
@@ -19,6 +20,9 @@ const db = mysql.createConnection({
     password: '',
     database: 'chatdatabase'
 });
+
+
+
 
 db.connect((err) => {
     if (err) {
@@ -65,7 +69,7 @@ const upload = multer({
 
 
 function checkFileType(file, cb) {
-    const filetypes = /jpeg|jpg|png|gif/;
+    const filetypes = /jpeg|jpg|png|jip|doc|docx|xls|xlsx/;
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     const mimetype = filetypes.test(file.mimetype);
     if (mimetype && extname) {

@@ -8,7 +8,7 @@ import "./InputText.css";
 
 const InputText = ({ addMessage, replyMessage, clearReply }) => {
   const [message, setMessage] = useState("");
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
   const replyMessageRef = useRef(null);
 
   useEffect(() => {
@@ -30,17 +30,18 @@ const InputText = ({ addMessage, replyMessage, clearReply }) => {
       });
 
       // Show success toast notification
-      toast.success("Image uploaded successfully!");
+      toast.success("File uploaded successfully!");
 
       return response.data;
     } catch (error) {
       console.error('Error uploading file:', error);
+      toast.error("Error uploading file.");
       return null;
     }
   };
 
   const sendMessage = async () => {
-    if (message.trim() || selectedImage) {
+    if (message.trim() || selectedFile) {
       let messageToSend = message.trim();
       let fileData = null;
 
@@ -48,13 +49,13 @@ const InputText = ({ addMessage, replyMessage, clearReply }) => {
         messageToSend = `Replying to: ${replyMessage.username}: ${replyMessage.message}\n${messageToSend}`;
       }
 
-      if (selectedImage) {
-        fileData = await uploadFile(selectedImage);
+      if (selectedFile) {
+        fileData = await uploadFile(selectedFile);
       }
 
       addMessage(messageToSend, fileData);
       setMessage("");
-      setSelectedImage(null);
+      setSelectedFile(null);
       clearReply();
     }
   };
@@ -69,11 +70,21 @@ const InputText = ({ addMessage, replyMessage, clearReply }) => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      if (file.type.startsWith("image/")) {
-        setSelectedImage(file);
+      const allowedTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "application/pdf",
+        "application/msword",
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      ];
+      if (allowedTypes.includes(file.type)) {
+        setSelectedFile(file);
       } else {
-        toast.error("Only image files are allowed png,jpg,gif."); // Toast notification for non-image files
-        setSelectedImage(null); // Clear selected image
+        toast.error("Only images, PDF, Word, and Excel files are allowed.");
+        setSelectedFile(null);
       }
     }
   };
@@ -97,11 +108,11 @@ const InputText = ({ addMessage, replyMessage, clearReply }) => {
         onKeyPress={handleKeyPress}
       ></textarea>
       <label className="file_label">
-        <IoCloudUploadOutline className="upload_icon" /> Upload Image
-        <input type="file" accept="image/*" onChange={handleFileChange} />
+        <IoCloudUploadOutline className="upload_icon" /> Upload File
+        <input type="file" accept=".jpeg,.jpg,.png,.pdf,.doc,.docx,.xls,.xlsx" onChange={handleFileChange} />
       </label>
-      {selectedImage && (
-        <p>Selected Image: {selectedImage.name}</p>
+      {selectedFile && (
+        <p>Selected File: {selectedFile.name}</p>
       )}
       <button onClick={sendMessage} className="send_button">
         <FaPaperPlane className="send_icon" /> Send
