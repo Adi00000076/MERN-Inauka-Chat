@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaUser, FaSignOutAlt, FaTimes } from "react-icons/fa";
+import { FaUser, FaSignOutAlt, FaTimes, FaBell } from "react-icons/fa";
 import ChatLists from "./ChatLists";
 import InputText from "./InputText";
 import UserLogin from "./UserLogin";
@@ -12,6 +12,7 @@ const ChatContainer = () => {
   const socketio = socketIOClient("http://localhost:3002/");
   const [chats, setChats] = useState([]);
   const [replyMessage, setReplyMessage] = useState(null);
+  const [unreadMessages, setUnreadMessages] = useState(0); // State to track unread messages
   const chatEndRef = useRef(null); // Define chatEndRef here
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const ChatContainer = () => {
 
     socketio.on("message", (msg) => {
       setChats((prevChats) => [...prevChats, msg]);
+      setUnreadMessages((prevCount) => prevCount + 1); // Increment unread messages count
     });
 
     return () => {
@@ -56,10 +58,12 @@ const ChatContainer = () => {
     localStorage.removeItem("avatar");
     setUser("");
     setChats([]);
+    setUnreadMessages(0); // Reset unread messages count on logout
   };
 
   const scrollToBottom = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    setUnreadMessages(0); // Reset unread messages count on viewing messages
   };
 
   useEffect(() => {
@@ -79,6 +83,12 @@ const ChatContainer = () => {
               <img src={Infyz} alt="Infyz" className="avatar" />
             </div>
             <div className="right-section">
+              <div className="notification">
+                <FaBell className="notification-icon" />
+                {unreadMessages > 0 && (
+                  <span className="unread-count">{unreadMessages}</span>
+                )}
+              </div>
               <p className="logout" onClick={logoutUser}>
                 <FaSignOutAlt className="logout-icon" />
                 <strong>Logout</strong>
